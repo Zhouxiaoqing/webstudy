@@ -10,8 +10,8 @@ function js_alert($msg = '', $url = '#') {
 }
 
 // 处理增删改查页面
-$action = $_GET['act'] ? $_GET['act'] : null; // url?后的参数默认在_GET变量中
-$id = $_GET['id'] ? $_GET['id'] : null;
+$action = isset($_GET['act']) ? $_GET['act'] : null; // url?后的参数默认在_GET变量中
+$id = isset($_GET['id']) ? $_GET['id'] : null;
 // echo $action . ' ' . $_POST['username'] . ' ' . $_POST['password'] . '<hr/>';
 
 $mysqli = new mysqli("127.0.0.1", "root", "", "test");

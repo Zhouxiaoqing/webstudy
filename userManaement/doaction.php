@@ -17,6 +17,8 @@ $id = isset($_GET['id']) ? $_GET['id'] : null;
 $mysqli = new mysqli("127.0.0.1", "root", "", "test");
 if ($mysqli->errno)
     die($mysqli->errno . ':' . $mysqli->error);
+// {重要}一定要设置字符集，否则mysql那边没设置，可能导致乱码！！！
+$mysqli->set_charset('utf8');
 
 switch ($action) {
     case 'add':
@@ -37,9 +39,10 @@ switch ($action) {
             js_alert("删除失败!", "userlist.php");
         break;
     case 'update':
-        $sql = "UPDATE user where id = " . $id;
+        $password = $_POST['newpassword'];
+        $sql = "UPDATE user SET password = '{$password}' WHERE id = " . $id;
         if ($mysqli->query($sql))
-            js_alert("更改失败!", "userlist.php");
+            js_alert("更改成功!", "userlist.php");
         else
             js_alert("更改失败!", "userlist.php");
         break;
